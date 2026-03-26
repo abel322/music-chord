@@ -1,22 +1,22 @@
-version: '3.8'
-
+version: '3.9'
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: musicchord-db
-    environment:
-      POSTGRES_USER: musicchord
-      POSTGRES_PASSWORD: musicchord123
-      POSTGRES_DB: musicchord
+  app:
+    build: .
     ports:
-      - "5432:5432"
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/mydb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U musicchord"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - db_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  db_data:
