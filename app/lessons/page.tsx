@@ -456,10 +456,6 @@ export default function LessonsPage() {
             </Card>
           </Box>
         </Fade>
-      </Container>
-    </Box>
-  );
-}
         <Fade in timeout={1500}>
           <Box
             sx={{
