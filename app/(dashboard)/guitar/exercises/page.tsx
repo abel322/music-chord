@@ -1,6 +1,6 @@
-﻿'use client';
+'use client';
 
-import ExerciseList from '@/frontend/src/pages/ExerciseList';
+import ExerciseList from '@/components/shared/ExerciseList';
 
 export default function GuitarExercises() {
   return <ExerciseList instrument="GUITAR" />;
