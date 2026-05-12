@@ -1,0 +1,1 @@
+﻿export default function Page() { return <div className='p-8'><h1>Seccion: profile (En migracion)</h1><p>Esta pagina se esta migrando desde React puro a Next.js Server Components. ¡Pronto estara lista!</p></div> }
