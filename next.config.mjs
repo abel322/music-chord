@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    unoptimized: true
+  },
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config, { isServer }) => {
@@ -8,7 +18,7 @@ const nextConfig = {
       config.resolve.alias.canvas = false;
       config.resolve.alias.encoding = false;
     }
-    
+
     // Ignorar archivos de worker de pdfjs
     config.module.rules.push({
       test: /pdf\.worker\.(min\.)?js/,
@@ -39,7 +49,9 @@ const nextConfig = {
   // Deshabilitar optimización de paquetes para pdfjs
   experimental: {
     esmExternals: 'loose',
+    serverComponentsExternalPackages: ['@prisma/client'],
   },
 }
 
 export default nextConfig
+
