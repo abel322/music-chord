@@ -1,21 +1,24 @@
 import express from 'express';
 import cors from 'cors';
-import { sanitizeInput } from '../../backend/middleware/sanitize.middleware';
-import { apiLimiter } from '../../backend/middleware/rate-limit.middleware';
-import { errorHandler } from '../../backend/middleware/error-handler.middleware';
 
-import bookRoutes from '../../backend/routes/book.routes';
-import userRoutes from '../../backend/routes/user.routes';
-import exerciseRoutes from '../../backend/routes/exercise.routes';
-import sessionRoutes from '../../backend/routes/session.routes';
-import levelRoutes from '../../backend/routes/level.routes';
-import dashboardRoutes from '../../backend/routes/dashboard.routes';
-import goalRoutes from '../../backend/routes/goal.routes';
-import recommendationRoutes from '../../backend/routes/recommendation.routes';
-import predictionRoutes from '../../backend/routes/prediction.routes';
-import exportRoutes from '../../backend/routes/export.routes';
-import exerciseProgressRoutes from '../../backend/routes/exercise-progress.routes';
-import authRoutes from '../../backend/routes/auth.routes';
+import { sanitizeInput } from '@/lib/middleware/sanitize.middleware';
+import { apiLimiter } from '@/lib/middleware/rate-limit.middleware';
+import { errorHandler } from '@/lib/middleware/error-handler.middleware';
+
+
+import bookRoutes from '@/lib/routes/book.routes';
+import userRoutes from '@/lib/routes/user.routes';
+import exerciseRoutes from '@/lib/routes/exercise.routes';
+import sessionRoutes from '@/lib/routes/session.routes';
+import levelRoutes from '@/lib/routes/level.routes';
+import dashboardRoutes from '@/lib/routes/dashboard.routes';
+import goalRoutes from '@/lib/routes/goal.routes';
+import recommendationRoutes from '@/lib/routes/recommendation.routes';
+import predictionRoutes from '@/lib/routes/prediction.routes';
+import exportRoutes from '@/lib/routes/export.routes';
+import exerciseProgressRoutes from '@/lib/routes/exercise-progress.routes';
+import authRoutes from '@/lib/routes/auth.routes';
+
 
 const app = express();
 
@@ -41,7 +44,7 @@ try {
 
 // Prefijo real para las rutas antiguas en Express API router.
 // Renombrado 'auth' a 'auth_express' para no chocar con Next-Auth de la app base actual
-app.use('/api/auth_express', authRoutes); 
+app.use('/api/auth_express', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/exercises', exerciseRoutes);
