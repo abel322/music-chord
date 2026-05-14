@@ -2,11 +2,13 @@
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { DashboardService } from "@/backend/services/dashboard.service";
-import { LevelService } from "@/backend/services/level.service";
-import { PredictionService } from "@/backend/services/prediction.service";
-import { GoalService } from "@/backend/services/goal.service";
+import { DashboardService } from "@/lib/services/dashboard.service";
+import { LevelService } from "@/lib/services/level-calculation.service"; // Nota el cambio de nombre aquí
+import { GoalService } from "@/lib/services/goal.service";
+// import { PredictionService } from "@/lib/services/prediction.service";
 import { Instrument } from "@prisma/client";
+
+
 
 export async function fetchDashboardData(filters?: { startDate?: string; endDate?: string; instrument?: string }) {
   const session = await getServerSession(authOptions);
@@ -35,13 +37,13 @@ export async function fetchDashboardData(filters?: { startDate?: string; endDate
   if (instrument) {
     try {
       levelData = await LevelService.getCurrentLevel(userId, instrument);
-    } catch (e) {}
+    } catch (e) { }
     try {
       predictionData = await PredictionService.getNextLevelPrediction(userId, instrument);
-    } catch (e) {}
+    } catch (e) { }
     try {
       goals = await GoalService.getGoals(userId, true, instrument);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   return {
